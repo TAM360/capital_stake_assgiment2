@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Silver\Bounceer\Bouncer;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,6 +12,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 3)->create();
+        $bouncer = Bouncer::class;
+
+        // generate 3 different users.
+        $admin = factory(App\User::class)->create();
+        $userManager = factory(App\User::class)->create();
+        $shopManager = factory(App\User::class)->create();
+
+        // create 3 different roles.
+        $bouncer::allow('admin')->everything();
+        $bouncer::allow('user-manager')->toManage(App\User::class);
+        $bouncer::allow('shop-manager')->toManage(App\Product::class);
+        $bouncer::allow('shop-manager')->toManage(App\Order::class);
+        
+        // Assign roles to users.
+        $admin->assign('admin');
+        $shopManager->assign('shop-manager');
+        $userManager->assign('user-manager');
     }
 }
