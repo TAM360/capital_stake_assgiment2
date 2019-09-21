@@ -4,7 +4,6 @@
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
-use Silver\Bounceer\Bouncer;
 
 /*
 |--------------------------------------------------------------------------
