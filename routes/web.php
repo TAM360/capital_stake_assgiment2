@@ -18,4 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::Get('/user/manager', ['uses'=>'HomeController@userManager', 'as'=>'customers.list']);
+Route::get('/user/manager', ['uses' => 'HomeController@userManager', 'as' => 'customers.list']);
+Route::get('/shop/products', ['uses' => 'HomeController@shopProducts', 'as' => 'product.list']);
+Route::get('/shop/orders', ['uses' => 'HomeController@shopOrders', 'as' => 'order.list']);
+Route::get('/orders/details/', ['uses' => 'HomeController@orderDetails', 'as' => 'order.details']);

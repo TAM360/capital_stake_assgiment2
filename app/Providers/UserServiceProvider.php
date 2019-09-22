@@ -10,7 +10,7 @@ use App\Product;
 use App\User;
 use App\Order;
 use App\OrderItem;
-use phpDocumentor\Reflection\Types\String_;
+use Illuminate\Support\Facades\DB;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -55,15 +55,16 @@ class UserServiceProvider extends ServiceProvider
     }
 
     public function getOrderData() {
-        $data = Order::latest()->get();
-        return Datatables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function($row) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+        $data = DB::table('orders')->join('customers', 'orders.customer_id', 'customers.id')->get();
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
+    public function getOrderDetails($id) {
+        $data = DB::table('order_items')
+            ->join('products', 'order_items.product_id', 'products.id')
+            ->where('order_items.order_id', '<>', $id)
+            ->get();
+        return Datatables::of($data)->addIndexColumn()->make(true);
     }
 
     public function getDataByRole(User $user, String $type) {
