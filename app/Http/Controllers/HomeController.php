@@ -27,7 +27,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function getCustomers(Request $request) {
+    public function userManager(Request $request) {
 
         if ($request->ajax()) {
             $userProvider = new UserServiceProvider(null);

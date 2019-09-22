@@ -18,4 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::Get('/customers', ['uses'=>'HomeController@getCustomers', 'as'=>'customers.list']);
+Route::Get('/user/manager', ['uses'=>'HomeController@userManager', 'as'=>'customers.list']);

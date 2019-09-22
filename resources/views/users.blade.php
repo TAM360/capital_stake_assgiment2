@@ -13,44 +13,77 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
-    
-<div class="container">
-    <h1>Laravel 5.8 Datatables Tutorial <br/> HDTuto.com</h1>
-    <table class="table table-bordered user-data-table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created At</th>
-                <!-- <th>Updated At</th> -->
-                <!-- <th width="100px">Action</th> -->
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-   
+    <div class="container">
+        <h1>User Admin</h1>
+        <table class="table table-bordered user-data-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <!-- <th>Updated At</th> -->
+                    <!-- <th width="100px">Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br><br><br>
+        <table class="table table-bordered customer-data-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </body>
    
 <script type="text/javascript">
-  $(function () {
-    
-    var table = $('.user-data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('customers.list') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'created_at', name: 'created at'},
-            // {data: 'created_at', name: 'updated at'},
-            // {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+
+
+    $( () => {
+        let usersTable = $('.user-data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                "url": "{{ route('customers.list') }}",
+                "dataSrc": function (data) {
+                    return data[0].original.data;
+                }
+            },
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'created_at', name: 'created at'},
+                // {data: 'created_at', name: 'updated at'},
+                // {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+        
+        let customerTable = $('.customer-data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                "url":"{{ route('customers.list') }}",
+                "dataSrc": function (data) {
+                    return data[1].original.data;
+                }
+            },
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'created_at', name: 'created at'},
+            ]
+        })
     });
-    
-  });
 </script>
 </html>
