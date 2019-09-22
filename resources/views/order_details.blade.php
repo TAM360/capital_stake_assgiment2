@@ -35,11 +35,11 @@
     $('.order-data-table').DataTable({
       data: dataset,
       columns: [
-          {title: 'Product ID'},
-          {title: 'Name'},
-          {title: 'Price'},
-          {title: 'Quantity'},
-        ]
+        {title: 'Product ID'},
+        {title: 'Name'},
+        {title: 'Quantity'},
+        {title: 'Price'},
+      ]
     });
   });
 </script>

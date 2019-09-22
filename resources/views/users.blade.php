@@ -46,8 +46,6 @@
 </body>
    
 <script type="text/javascript">
-
-
     $( () => {
         let usersTable = $('.user-data-table').DataTable({
             processing: true,
