@@ -68,7 +68,7 @@ class UserServiceProvider extends ServiceProvider
     }
 
     public function getDataByRole(User $user, String $type) {
-        if (Bouncer::is($user)->a('user-manager') == true) {
+        if (Bouncer::is($user)->a('user-manager') || Bouncer::is($user)->a('admin')) {
             return array($this->getUsersData(), $this->getCustomerData());
         } else if (Bouncer::is($user)->a('shop-manager') == true && $type == "list_products") {
             return $this->getProductData();

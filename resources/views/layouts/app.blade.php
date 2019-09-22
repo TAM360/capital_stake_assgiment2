@@ -54,6 +54,10 @@
                             @elseif (Bouncer::is(Auth::user())->a('shop-manager'))
                                 <li><a class="nav-link" href="{{ route('product.list') }}">Product List</a></li>
                                 <li><a class="nav-link" href="{{ route('order.list') }}">Customer Orders</a></li>
+                            @elseif(Bouncer::is(Auth::user())->an('admin'))
+                                {{-- <li><a class="nav-link" href="{{ route('product.list') }}">Product List</a></li> --}}
+                                <li><a class="nav-link" href="{{ route('customers.list') }}">Customer Bio Data</a></li>
+                                {{-- <li><a class="nav-link" href="{{ route('order.list') }}">Customer Orders</a></li> --}}
                             @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
